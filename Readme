@@ -2,7 +2,9 @@ heroku-enable-yubikey-only-when-it-is-needed
 
 This is a Heroku CLI plugin that tells YubiSiwtch to turn on your yubikey nano right before it's needed, and then turns it off again.
 
-You can get YubiSwitch at https://github.com/pallotron/yubiswitch
+For MacOS You can get YubiSwitch at https://github.com/pallotron/yubiswitch
+
+For Linux see https://github.com/gsstark/yubiswitch-for-linux
 
 Install this plugin:
 heroku plugins:install https://github.com/will/heroku-enable-yubikey-only-when-it-is-needed
