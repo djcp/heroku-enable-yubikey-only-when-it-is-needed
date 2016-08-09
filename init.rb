@@ -1,12 +1,12 @@
 require 'fileutils'
-require 'mkmf'
 
 class Heroku::Auth
   class << self
     alias_method :_orig_ask_for_second_factor, :ask_for_second_factor
     def ask_for_second_factor
+      yubitoggle_exists = ENV['PATH'].split(':').each {|folder| File.executable?(File.join(folder, 'yubitoggle'))}
       if RUBY_PLATFORM.include? "linux"
-        if find_executable "yubitoggle"
+        if yubitoggle_exists
           `yubitoggle --on`
         else
           `yubiswitch on`
@@ -16,7 +16,7 @@ class Heroku::Auth
       end
       result = _orig_ask_for_second_factor
       if RUBY_PLATFORM.include? "linux"
-        if find_executable "yubitoggle"
+        if yubitoggle_exists
           `yubitoggle --off`
         else
           `yubiswitch off`
